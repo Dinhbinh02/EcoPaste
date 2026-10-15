@@ -1,6 +1,8 @@
 import { useEventListener, useUnmount } from "ahooks";
 import { type FC, type ReactNode, useRef, useState } from "react";
+import { useSnapshot } from "valtio";
 import { useKeyboardEvent } from "@/hooks/useKeyboardEvent";
+import { settingsState } from "@/stores/settings";
 import { cn } from "@/utils/cn";
 import { isMac, isWinClipboardWindow } from "@/utils/is";
 
@@ -109,11 +111,14 @@ const KeyHint: FC<KeyHintProps> = (props) => {
     clearBlurResetTimer();
   });
 
+  const settings = useSnapshot(settingsState);
+  const showBadge = active && (settings.shortcuts?.showHints ?? true);
+
   return (
     <div className="relative">
       <div
         className={cn("flex items-center justify-center", {
-          "opacity-0": active,
+          "opacity-0": showBadge,
         })}
       >
         {iconName ? <i className={cn("text-base", iconName)} /> : children}
@@ -123,7 +128,7 @@ const KeyHint: FC<KeyHintProps> = (props) => {
         className={cn(
           "-translate-1/2 absolute top-1/2 left-1/2 inline-flex size-4 items-center justify-center rounded-1 bg-ant-bg-spotlight font-bold font-mono text-ant-light-solid text-xs",
           {
-            "opacity-0": !active,
+            "opacity-0": !showBadge,
           },
           className,
         )}

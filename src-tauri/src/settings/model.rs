@@ -126,6 +126,8 @@ pub struct Shortcuts {
     pub open_preference: String,
     /// 仅 Windows：用 Win+V 唤起剪贴板窗口，替代系统剪贴板历史面板。默认关闭。
     pub win_v: bool,
+    /// 按下修饰键时是否展示快捷键徽标提示。默认开启。
+    pub show_hints: bool,
 }
 
 impl Default for Shortcuts {
@@ -134,6 +136,7 @@ impl Default for Shortcuts {
             open_clipboard: "Alt+C".into(),
             open_preference: "Alt+X".into(),
             win_v: false,
+            show_hints: true,
         }
     }
 }

@@ -279,10 +279,28 @@ export function useClipboardPreviewController(
     target: document,
   });
 
+  const isEditableEventTarget = (event: KeyboardEvent) => {
+    const target = event.target;
+    if (target instanceof HTMLElement) {
+      if (target.isContentEditable) return true;
+      const tagName = target.tagName.toLowerCase();
+      if (tagName === "input" || tagName === "textarea") return true;
+    }
+    const active = document.activeElement;
+    if (active instanceof HTMLElement) {
+      if (active.isContentEditable) return true;
+      const tagName = active.tagName.toLowerCase();
+      if (tagName === "input" || tagName === "textarea") return true;
+    }
+    return false;
+  };
+
   /**
    * Space 按下打开当前 active item；忽略重复 keydown，避免重复 IPC。
    */
   const handlePreviewSpaceDown = (event: KeyboardEvent) => {
+    if (isEditableEventTarget(event)) return;
+
     event.preventDefault();
 
     if (!previewSettings.spaceEnabled) return;
@@ -303,6 +321,7 @@ export function useClipboardPreviewController(
    */
   const handlePreviewSpaceUp = (event: KeyboardEvent) => {
     if (!isSpaceKey(event)) return;
+    if (isEditableEventTarget(event)) return;
 
     event.preventDefault();
 

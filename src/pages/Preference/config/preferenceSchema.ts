@@ -741,6 +741,23 @@ export const preferenceTabs: PreferenceTab[] = [
               return settings.shortcuts.openPreference;
             },
           },
+          {
+            control: { type: "switch" },
+            id: "shortcuts.showHints",
+            keywords: [
+              "shortcut",
+              "hint",
+              "badge",
+              "recommendation",
+              "key",
+              "cmd",
+              "ctrl",
+            ],
+            path: ["shortcuts", "showHints"],
+            value: (settings) => {
+              return settings.shortcuts.showHints;
+            },
+          },
           ...(isWin
             ? [
                 {

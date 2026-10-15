@@ -253,7 +253,10 @@ const ShortcutRecorder: FC<ShortcutRecorderProps> = (props) => {
       return;
     }
 
-    if (event.key === "Escape") {
+    const hasModifier =
+      event.metaKey || event.ctrlKey || event.altKey || event.shiftKey;
+
+    if (event.key === "Escape" && !hasModifier) {
       await resumeShortcuts();
       inputRef.current?.blur();
 

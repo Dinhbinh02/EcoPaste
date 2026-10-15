@@ -503,7 +503,7 @@
           "title": "Clear Search on Next Open"
         },
         "defaultFocus": {
-          "description": "Select the search box when the clipboard window opens so you can type keywords right away.",
+          "description": "Select the search box on open and automatically type into search whenever the window is active.",
           "title": "Focus Search on Window Open"
         },
         "sort": {
@@ -536,6 +536,10 @@
           "description": "Open or hide the preferences window.",
           "placeholder": "Alt+X",
           "title": "Open Preferences Window"
+        },
+        "showHints": {
+          "description": "Show shortcut hint badges on buttons and items when pressing Cmd or Ctrl.",
+          "title": "Show Shortcut Hints"
         },
         "winV": {
           "description": "Press Win+V to summon EcoPaste instead of the Windows clipboard history panel.",

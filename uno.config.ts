@@ -1,3 +1,6 @@
+// Prevent UnoCSS preset-icons from misdetecting IDE terminal as VS Code extension host
+delete process.env.VSCODE_CWD;
+
 import {
   defineConfig,
   presetIcons,

@@ -503,7 +503,7 @@
           "title": "下次打开时清空搜索"
         },
         "defaultFocus": {
-          "description": "打开剪贴板窗口时自动选中搜索框，方便直接输入关键词。",
+          "description": "打开剪贴板窗口时自动选中搜索框，并在窗口激活时直接输入关键词。",
           "title": "打开窗口时聚焦搜索"
         },
         "sort": {
@@ -536,6 +536,10 @@
           "description": "打开或隐藏偏好设置窗口。",
           "placeholder": "Alt+X",
           "title": "打开偏好设置窗口"
+        },
+        "showHints": {
+          "description": "按下 Cmd 或 Ctrl 修饰键时在按钮和条目上显示快捷键提示徽标。",
+          "title": "显示快捷键提示"
         },
         "winV": {
           "description": "按 Win+V 唤起 EcoPaste，替代 Windows 系统剪贴板历史面板。",

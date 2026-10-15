@@ -612,6 +612,12 @@ const List: FC = () => {
     }
 
     if (isSpaceKey(event)) {
+      if (
+        shouldUseNativeCopy(event) ||
+        isEditableElement(document.activeElement)
+      ) {
+        return;
+      }
       handlePreviewSpaceDown(event);
       return;
     }
@@ -1337,16 +1343,20 @@ function getSelectedIdAfterDelete(
   return nextItem?.id ?? null;
 }
 
+function isEditableElement(element: Element | null): boolean {
+  if (element instanceof HTMLElement) {
+    if (element.isContentEditable) return true;
+    const tagName = element.tagName.toLowerCase();
+    if (tagName === "input" || tagName === "textarea") return true;
+  }
+  return false;
+}
+
 /**
  * 判断 Cmd/Ctrl+C 是否应交给浏览器原生复制，避免覆盖输入框或文本选区复制。
  */
 function shouldUseNativeCopy(event: KeyboardEvent) {
-  const target = event.target;
-  if (target instanceof HTMLElement) {
-    const tagName = target.tagName.toLowerCase();
-    if (target.isContentEditable) return true;
-    if (tagName === "input" || tagName === "textarea") return true;
-  }
+  if (isEditableElement(event.target as Element)) return true;
 
   const selection = window.getSelection();
 
