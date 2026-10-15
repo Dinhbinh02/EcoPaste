@@ -247,12 +247,9 @@ jobs:
           CI: false
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
           PLATFORM: ${{ matrix.os }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           args: --target ${{ matrix.target }}
           prerelease: true
-          releaseBody: ${{ needs.prepare-nightly.outputs.release_body }}
           releaseId: ${{ needs.prepare-nightly.outputs.release_id }}
           retryAttempts: 3
           tagName: ${{ needs.prepare-nightly.outputs.tag_name }}
